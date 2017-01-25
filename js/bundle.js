@@ -70,6 +70,8 @@
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _isEqual = __webpack_require__(3);
 	
 	var _isEqual2 = _interopRequireDefault(_isEqual);
@@ -77,8 +79,96 @@
 	var _keys = __webpack_require__(68);
 	
 	var _keys2 = _interopRequireDefault(_keys);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var CSSPandas = function () {
+	  function CSSPandas(levels, $el) {
+	    _classCallCheck(this, CSSPandas);
+	
+	    this.el = $el;
+	    this.levels = levels;
+	    this.currentLevel = 0;
+	    if (isNaN(window.localStorage.level)) {
+	      window.localStorage.level = 0;
+	    }
+	    if (window.localStorage.level !== 0) {
+	      this.currentLevel = window.localStorage.level;
+	    }
+	    this.setupPandas(this.levels[this.currentlevel]);
+	    this.levelButtons();
+	  }
+	
+	  _createClass(CSSPandas, [{
+	    key: 'setupGame',
+	    value: function setupGame(currentLevel) {
+	      if (this.currentLevel === 0) {
+	        $('prev-level-button').prop('disabled', true);
+	      } else {
+	        $('prev-level-button').prop('disabled', false);
+	      }
+	
+	      if (this.currentLevel === 4) {
+	        $('next-level-button').prop('disabled', true);
+	      } else {
+	        $('next-level-button').prop('disabled', false);
+	      }
+	      if (!window.lcaolStorage.completedLevels) {
+	        window.localStorage.completedLevels = [];
+	      }
+	      window.localStorage.level = this.currentLevel;
+	      // this.removestyling
+	      // $('.details').append(currentLevel.details);
+	      // $('.level').html(`Level ${this.currentLevel} of 5`);
+	      // $('css-input').append(`<textarea rows=${keys(currentLevel.solution).length} cols='100'></textarea>`);
+	
+	      // actual css stuff
+	    }
+	  }, {
+	    key: 'enableFinishLevelButton',
+	    value: function enableFinishLevelButton() {
+	      var button = $('.finish-level-button');
+	      button.prop('disabled', false);
+	    }
+	  }, {
+	    key: 'disableFinishLevelButton',
+	    value: function disableFinishLevelButton() {
+	      var button = $('.finish-level-button');
+	      button.prop('disabled', true);
+	    }
+	  }, {
+	    key: 'levelButtons',
+	    value: function levelButtons() {
+	      var _this = this;
+	
+	      var that = this;
+	      var finishLevelButton = $('.finish-level-button');
+	      finishLevelButton.on('click', function (e) {
+	        e.preventDefault();
+	        _this.currentLevel++;
+	        if (_this.currentLevel === 5) {
+	          _this.currentLevel = 0;
+	        }
+	        _this.setupPands(_this.levels[_this.currentLevel]);
+	        _this.disableNextLevelButton();
+	      });
+	      $('prev-level-button').on('click', function (e) {
+	        e.preventDefault;
+	        that.currentLevel--;
+	        that.setupPandas(that.levels[that.currentLevel]);
+	      });
+	      $('next-level-button').on('click', function (e) {
+	        e.preventDefault;
+	        that.currentLevel++;
+	        that.setupPandas(that.levels[that.currentLevel]);
+	      });
+	    }
+	  }]);
+
+	  return CSSPandas;
+	}();
 
 /***/ },
 /* 3 */
