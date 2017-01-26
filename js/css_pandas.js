@@ -7,56 +7,58 @@ class CSSPandas{
     this.levels = levels;
     this.currentLevel = 0;
     if(isNaN(window.localStorage.level)){
-      window.localStorage.level = 0;
+      window.localStorage.level = "0";
     }
-    if(window.localStorage.level !== 0){
-      this.currentLevel = window.localStorage.level;
+    if(window.localStorage.level !== "0"){
+      this.currentLevel =  parseInt(window.localStorage.level);
     }
-    this.setupPandas(this.levels[this.currentlevel]);
+    this.setupPandas(this.levels[this.currentLevel]);
     this.levelButtons();
   }
 
   setupPandas(currentLevel){
+    console.log(typeof this.currentLevel);
     if(this.currentLevel === 0){
-      $('prev-level-button').prop('disabled', true);
+      $('.prev-level-button').prop('disabled', true);
     } else {
-      $('prev-level-button').prop('disabled', false);
+      $('.prev-level-button').prop('disabled', false);
     }
 
     if (this.currentLevel === 4){
-      $('next-level-button').prop('disabled', true);
+      $('.next-level-button').prop('disabled', true);
     } else {
-      $('next-level-button').prop('disabled', false);
+      $('.next-level-button').prop('disabled', false);
     }
     if(!window.localStorage.completedLevels){
       window.localStorage.completedLevels = [];
     }
-    window.localStorage.level = this.currentLevel;
+    window.localStorage.level = currentLevel;
 
     // this.removestyling
-    $('.directions').append(this.currentLevel.directions);
-    $('.level-number').html(`Level ${this.currentLevel} of 5`);
+    $('.directions').append(currentLevel.directions);
+    $('.level-number').html(`Level ${currentLevel.level} of 5`);
     $('css-input').append(`<textarea rows=${keys(currentLevel.solution).length} cols='100'></textarea>`);
     // $('html').append()
     // actual css stuff
     //finish tomorrow
 
     let markupHolder = $("<div/>");
-    this.currentLevel.setup.forEach((i, el) =>{
+    currentLevel.setup.forEach((i, el) =>{
       if(el.nodeType === 1){
         let result = this.markup(el);
         markupHolder.append(result);
       }
     });
 
-    $('.bed').html(this.currentLevel.bedMarkUp);
+    $('.bed').html(currentLevel.bedMarkUp);
     $('.hmtl').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
 
-    let bed = $('<img src="./img/bed.png class="bed"></img>');
+    let bed = $('<img src="./images/bed.png" class="bed"></img>');
     $('.right-side').append(bed);
     let animals = currentLevel.animals;
     for(let i =0; i < animals.length; i++){
-      let animal = $('<img src="./imgs/${animals[i]}" class="animal"></img>');
+      console.log(animals[i]);
+      let animal = $(`<img src="./images/${animals[i]}" class="animal"></img>`);
       this.el.append(animal);
     }
     this.createInput();
@@ -85,12 +87,12 @@ class CSSPandas{
       this.setupPandas(this.levels[this.currentLevel]);
       this.disableFinishLevelButton();
     });
-    $('prev-level-button').on('click', (e) => {
+    $('.prev-level-button').on('click', (e) => {
       e.preventDefault;
       that.currentLevel--;
       that.setupPandas(that.levels[that.currentLevel]);
     });
-    $('next-level-button').on('click', (e) => {
+    $('.next-level-button').on('click', (e) => {
       e.preventDefault;
       that.currentLevel++;
       that.setupPandas(that.levels[that.currentLevel]);
@@ -164,7 +166,6 @@ class CSSPandas{
       }
     });
   }
-
 }
 
 export default CSSPandas;

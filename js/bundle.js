@@ -46,9 +46,53 @@
 
 	'use strict';
 	
+	var _levels = __webpack_require__(1);
+	
+	var _css_pandas = __webpack_require__(2);
+	
+	var _css_pandas2 = _interopRequireDefault(_css_pandas);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	document.addEventListener('DOMContentLoaded', function () {
+	  var csspandas = new _css_pandas2.default((0, _levels.levels)(), $('.frame'));
+	});
+	// $(() => {
+	//   let csspandas = new CSSPandas(levels(), $('.bed'));
+	// });
+	// console.log("hello world");
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var levels = exports.levels = function levels() {
+	
+	  return [{
+	    level: 1,
+	    directions: '<p>test test test</p>',
+	    animals: ['bunny.png'],
+	    solution: 'panda',
+	    setup: ['<panda/>', '<panda/>']
+	  }];
+	};
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -72,12 +116,12 @@
 	    this.levels = levels;
 	    this.currentLevel = 0;
 	    if (isNaN(window.localStorage.level)) {
-	      window.localStorage.level = 0;
+	      window.localStorage.level = "0";
 	    }
-	    if (window.localStorage.level !== 0) {
-	      this.currentLevel = window.localStorage.level;
+	    if (window.localStorage.level !== "0") {
+	      this.currentLevel = parseInt(window.localStorage.level);
 	    }
-	    this.setupPandas(this.levels[this.currentlevel]);
+	    this.setupPandas(this.levels[this.currentLevel]);
 	    this.levelButtons();
 	  }
 	
@@ -86,46 +130,48 @@
 	    value: function setupPandas(currentLevel) {
 	      var _this = this;
 	
+	      console.log(_typeof(this.currentLevel));
 	      if (this.currentLevel === 0) {
-	        $('prev-level-button').prop('disabled', true);
+	        $('.prev-level-button').prop('disabled', true);
 	      } else {
-	        $('prev-level-button').prop('disabled', false);
+	        $('.prev-level-button').prop('disabled', false);
 	      }
 	
 	      if (this.currentLevel === 4) {
-	        $('next-level-button').prop('disabled', true);
+	        $('.next-level-button').prop('disabled', true);
 	      } else {
-	        $('next-level-button').prop('disabled', false);
+	        $('.next-level-button').prop('disabled', false);
 	      }
 	      if (!window.localStorage.completedLevels) {
 	        window.localStorage.completedLevels = [];
 	      }
-	      window.localStorage.level = this.currentLevel;
+	      window.localStorage.level = currentLevel;
 	
 	      // this.removestyling
-	      $('.directions').append(this.currentLevel.directions);
-	      $('.level-number').html('Level ' + this.currentLevel + ' of 5');
+	      $('.directions').append(currentLevel.directions);
+	      $('.level-number').html('Level ' + currentLevel.level + ' of 5');
 	      $('css-input').append('<textarea rows=' + (0, _keys2.default)(currentLevel.solution).length + ' cols=\'100\'></textarea>');
 	      // $('html').append()
 	      // actual css stuff
 	      //finish tomorrow
 	
 	      var markupHolder = $("<div/>");
-	      this.currentLevel.setup.forEach(function (i, el) {
+	      currentLevel.setup.forEach(function (i, el) {
 	        if (el.nodeType === 1) {
 	          var result = _this.markup(el);
 	          markupHolder.append(result);
 	        }
 	      });
 	
-	      $('.bed').html(this.currentLevel.bedMarkUp);
+	      $('.bed').html(currentLevel.bedMarkUp);
 	      $('.hmtl').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
 	
-	      var bed = $('<img src="./img/bed.png class="bed"></img>');
+	      var bed = $('<img src="./images/bed.png" class="bed"></img>');
 	      $('.right-side').append(bed);
 	      var animals = currentLevel.animals;
 	      for (var i = 0; i < animals.length; i++) {
-	        var animal = $('<img src="./imgs/${animals[i]}" class="animal"></img>');
+	        console.log(animals[i]);
+	        var animal = $('<img src="./images/' + animals[i] + '" class="animal"></img>');
 	        this.el.append(animal);
 	      }
 	      this.createInput();
@@ -158,12 +204,12 @@
 	        _this2.setupPandas(_this2.levels[_this2.currentLevel]);
 	        _this2.disableFinishLevelButton();
 	      });
-	      $('prev-level-button').on('click', function (e) {
+	      $('.prev-level-button').on('click', function (e) {
 	        e.preventDefault;
 	        that.currentLevel--;
 	        that.setupPandas(that.levels[that.currentLevel]);
 	      });
-	      $('next-level-button').on('click', function (e) {
+	      $('.next-level-button').on('click', function (e) {
 	        e.preventDefault;
 	        that.currentLevel++;
 	        that.setupPandas(that.levels[that.currentLevel]);
@@ -253,8 +299,6 @@
 	exports.default = CSSPandas;
 
 /***/ },
-/* 1 */,
-/* 2 */,
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
