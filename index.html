@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>CSS Pandas</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="./stylesheets/css/main.css" media="screen">
-    <scriptsrc="js/bundle.js"></script>
+    <link rel="stylesheet" href="./stylesheets/css/game.css" media="screen">
+    <script src="js/bundle.js"></script>
   </head>
   <body>
     <div class="css-pandas clearfix">
@@ -14,6 +14,8 @@
           <h3>CSS Pandas</h3>
           <div class="nav-buttons">
             <button class='prev-level-button'><</button>
+            <div class="level-number">
+            </div>
             <button class='next-level-button'>></button>
           </div>
         </div>
@@ -23,11 +25,17 @@
 
         <div class="code-editor-container">
           <div class="code-editor-header">
-          CSS Editor style.css
+            <div>
+              CSS Editor
+            </div>
+            <div>
+              style.css
+            </div>
           </div>
-          <div class="code-editor-lines">
-            1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
-          </div>
+          <div class='post-editor-header'>
+            <div class="code-editor-lines">
+              1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+            </div>
             <div class="code-editor">
               <div class="css-input">
               </div>
@@ -38,19 +46,21 @@
                 }<br>
               </div>
             </div>
+          </div>
         </div>
       </section>
 
-      <section class="game clearfix">
-        <div class="woods"></div>
+      <section class="right-side clearfix">
+        <div class="frame"></div>
         <div class="html-editor-container">
           <div class="html-editor-header">
             HTML Viewer table.html
           </div>
           <div class="html-editor">
             <div class="html">
-              <div>&ltdiv class="table"&gt
-            </div>
+              &ltdiv class="table"&gt
+              &lt/div&gt
+              &lt;test/&gt;
           </div>
     </div>
   </body>

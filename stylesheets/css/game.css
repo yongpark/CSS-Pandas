@@ -1,0 +1,159 @@
+.css-style {
+  width: 100%;
+}
+  .css-style textarea {
+    font-size: 20px;
+    padding: 0;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    background-color: black;
+}
+
+.css-pandas {
+  display: flex;
+  width: 95%;
+}
+
+.left-side{
+  width: 50%;
+  background-color: green;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 800px;
+}
+  .left-side .directions{
+    width: 95%;
+  }
+
+.right-side{
+  width: 50%;
+  background-color: blue;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.nav-bar-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+}
+  .nav-bar-header h3{
+    margin: 10px;
+  }
+
+.nav-buttons{
+  display: flex;
+}
+  .nav-buttons .prev-level-button{
+    border-radius: 5px;
+    padding-left: 10px;
+    border: none;
+  }
+  .nav-buttons .next-level-button{
+    border-radius: 5px;
+    padding-right: 10px;
+    border: none;
+  }
+  .nav-buttons .level-number{
+    background-color: #cccccc;
+    top: 10px;
+    padding: 0 10px;
+  }
+
+.code-editor-container{
+  width: 93%;
+  font-size: 20px;
+  height: 250px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #ccc;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.code-editor-header{
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  height: 10%;
+}
+
+.post-editor-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.code-editor-lines{
+  width: 25px;
+  height: 250px;
+  text-align: right;
+  color: black;
+  background-color: #73B8E1;
+}
+
+.code-editor{
+  width: 85%;
+  padding: 10px;
+}
+
+.css-input{
+  width: 100%;
+  padding-left: 5px;
+}
+  .css-input textarea{
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    background-color: white;
+  }
+
+.post-css-input{
+  margin-top: -10px;
+}
+  .post-css-input .finish-level-button{
+    float: right;
+    border-radius: 5px;
+  }
+  .post-css-input .finish-level-button:enabled{
+    background-color: white;
+  }
+
+.right-side{
+  box-sizing: border-box;
+  width: 50%;
+  height: 800px;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  background-color: orange;
+  display: flex;
+}
+  .right-side .frame .animes{
+    padding: 0 10px;
+    display: flex;
+    height: 80%;
+    position: absolute;
+    width: 90%;
+  }
+
+.html-editor-container{
+  width: 93%;
+  font-size: 20px;
+  height: 250px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #ccc;
+  margin-top: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
