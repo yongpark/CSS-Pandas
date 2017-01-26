@@ -150,7 +150,7 @@
 	      // this.removestyling
 	      $('.directions').append(currentLevel.directions);
 	      $('.level-number').html('Level ' + currentLevel.level + ' of 5');
-	      $('css-input').append('<textarea rows=' + (0, _keys2.default)(currentLevel.solution).length + ' cols=\'100\'></textarea>');
+	      $('.css-input').append('<textarea rows=' + (0, _keys2.default)(currentLevel.solution).length + ' cols=\'100\'></textarea>');
 	      // $('html').append()
 	      // actual css stuff
 	      //finish tomorrow
