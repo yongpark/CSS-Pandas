@@ -17,7 +17,6 @@ class CSSPandas{
   }
 
   setupPandas(currentLevel){
-    console.log(typeof this.currentLevel);
     if(this.currentLevel === 0){
       $('.prev-level-button').prop('disabled', true);
     } else {
@@ -34,34 +33,48 @@ class CSSPandas{
     }
     window.localStorage.level = currentLevel;
 
-    // this.removestyling
+    this.reset();
     $('.directions').append(currentLevel.directions);
     $('.level-number').html(`Level ${currentLevel.level} of 5`);
-    $('.css-input').append(`<textarea rows=${keys(currentLevel.solution).length} cols='100'></textarea>`);
+    $('.css-input').append(`<textarea rows=${keys(currentLevel.solution).length} cols='80'></textarea>`);
     // $('html').append()
     // actual css stuff
     //finish tomorrow
 
     let markupHolder = $("<div/>");
-    currentLevel.setup.forEach((i, el) =>{
-      if(el.nodeType === 1){
+    $(currentLevel.setup).each((i, el) =>{
+      if(el.nodeType == 1){
         let result = this.markup(el);
         markupHolder.append(result);
       }
     });
 
     $('.bed').html(currentLevel.bedMarkUp);
-    $('.hmtl').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
+    $('.html').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
 
-    let bed = $('<img src="./images/bed.png" class="bed"></img>');
-    $('.right-side').append(bed);
+    let bed = $('<img src="./images/bed.svg" class="bedsvg"></img>');
+    $('.frame').append(bed);
     let animals = currentLevel.animals;
+    let nested_animals = currentLevel.nested_animals;
     for(let i =0; i < animals.length; i++){
-      console.log(animals[i]);
       let animal = $(`<img src="./images/${animals[i]}" class="animal"></img>`);
       this.el.append(animal);
     }
+    for(let j = 0; j < nested_animals.length; j++){
+      let nested = $(`<img src="./images/${nested_animals[j]}" class="nested-animal"></img>`);
+      this.el.append(nested);
+    }
     this.createInput();
+  }
+
+  reset(){
+    this.el.empty();
+    this.disableFinishLevelButton();
+    $('finish-level-button').prop('disabled', true);
+    $('.directions').empty();
+    $('.bed').empty();
+    $('.css-input').empty();
+    $('.html').empty();
   }
 
 
@@ -101,12 +114,14 @@ class CSSPandas{
 
   markup(el){
     let children = el.children.length > 0 ? true: false;
+
     let elName = el.tagName.toLowerCase();
     let wrapper = $('<div/>');
     let attributes = '';
-    $.each(el.attributes, () => {
-      if (this.specified) {
-        attributes = attributes + ' ' + this.name + '="' + this.value + '"';
+    // console.log(el.attributes);
+    $.each(el.attributes, (i, value) => {
+      if (value.specified) {
+        attributes = attributes + ' ' + value.name + '="' + value.value + '"';
       }
     });
     let space = ' ';
@@ -145,8 +160,8 @@ class CSSPandas{
         if (wins === 0){
           let completedLevels = [];
           if(window.localStorage.completedLevels.length > 0){
-            window.localStorage.completedLevels.forEach((level) => {
-              completedLevels.push(level);
+            window.localStorage.completedLevels.split('').forEach((level) => {
+                completedLevels.push(parseInt(level));
             });
           }
           $('.bed').append("<div class='win-level-div'>Next Level!<button class='win-level-button>Next</button></div>'");

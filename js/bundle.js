@@ -75,10 +75,44 @@
 	
 	  return [{
 	    level: 1,
-	    directions: '<p>test test test</p>',
-	    animals: ['bunny.png'],
+	    directions: '<p>Welcome to CSS Panda, a CSS tutorial inspired by Flexbox Froggy! We’ll be learning to use CSS to select the various stuffed animals on the bed.<strong>A</strong> selects elements of type <strong>A<strong>. Element type refers to the type of tag. &ltdiv&gt, &ltul&gt, and &ltli&gt are all different elements. Try and selecting the pandas on the bed with their selector tag.</p>',
+	    animals: ['panda.svg', 'panda.svg'],
+	    nested_animals: [],
 	    solution: 'panda',
-	    setup: ['<panda/>', '<panda/>']
+	    setup: '\n      <panda/>\n      <panda/>\n      '
+	
+	  }, {
+	    level: 2,
+	    directions: '</p>ID tags allow you to further specify which element you can choose. There are now two stuffed bunnies on the bed. Let’s to try select only the blue bunny this time.</p>',
+	    animals: ['bunny.svg', 'blue_bunny.svg'],
+	    nested_animals: [],
+	    solution: 'blue',
+	    setup: '\n      <bunny/>\n      <bunny id="blue"/>\n      '
+	
+	  }, {
+	    level: 3,
+	    directions: '</p>Class tags function similarly to ID tag allowing you to specify which element you can choose. There are two of the same duck on the screen, one with a class of "better-duck". Let’s choose the "cuter panda".</p>',
+	    animals: ['panda.svg', 'panda.svg'],
+	    nested_animals: [],
+	    solution: '.cuter-panda',
+	    setup: '\n      <panda/>\n      <panda class="cuter-panda"/>\n      '
+	
+	  }, {
+	    level: 4,
+	    directions: '</p>You can use descendant selectors to select elements inside another elemnt, also called a parent element. For example, to choose a &ltpanda&gt element inside a &ltbunny&gt you input "bunny panda". Now let’s try and select the bunny held by the panda.</p>',
+	    animals: ['panda.svg', 'elephant.svg'],
+	    nested_animals: ['bunny.svg'],
+	    solution: 'panda bunny',
+	    setup: '\n      <panda>\n        <bunny"/>\n      </panda>\n      <elephant/>\n      '
+	
+	  }, {
+	    level: 5,
+	    directions: '</p>Let’s put what you learned into practice. Using a combination of the previous levels, let’s select the cuter duck held by the elephant.</p>',
+	    animals: ['panda.svg', 'duck.svg', 'elephant.svg', 'elephant.svg'],
+	    nested_animals: ['duck.svg', 'duck.svg'],
+	    solution: 'panda bunny.cuter-bunny ',
+	    setup: '\n      <panda/>\n      <duck class="cuter-duck"/>\n      <elephant>\n      <duck/>\n      </elephant>\n      <elephant>\n      <duck class="cuter-duck"/>\n      </elephant>\n      '
+	
 	  }];
 	};
 
@@ -91,8 +125,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -130,7 +162,6 @@
 	    value: function setupPandas(currentLevel) {
 	      var _this = this;
 	
-	      console.log(_typeof(this.currentLevel));
 	      if (this.currentLevel === 0) {
 	        $('.prev-level-button').prop('disabled', true);
 	      } else {
@@ -147,34 +178,49 @@
 	      }
 	      window.localStorage.level = currentLevel;
 	
-	      // this.removestyling
+	      this.reset();
 	      $('.directions').append(currentLevel.directions);
 	      $('.level-number').html('Level ' + currentLevel.level + ' of 5');
-	      $('.css-input').append('<textarea rows=' + (0, _keys2.default)(currentLevel.solution).length + ' cols=\'100\'></textarea>');
+	      $('.css-input').append('<textarea rows=' + (0, _keys2.default)(currentLevel.solution).length + ' cols=\'80\'></textarea>');
 	      // $('html').append()
 	      // actual css stuff
 	      //finish tomorrow
 	
 	      var markupHolder = $("<div/>");
-	      currentLevel.setup.forEach(function (i, el) {
-	        if (el.nodeType === 1) {
+	      $(currentLevel.setup).each(function (i, el) {
+	        if (el.nodeType == 1) {
 	          var result = _this.markup(el);
 	          markupHolder.append(result);
 	        }
 	      });
 	
 	      $('.bed').html(currentLevel.bedMarkUp);
-	      $('.hmtl').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
+	      $('.html').html('<div>&ltdiv class="bed"&gt' + markupHolder.html() + '&lt/div&gt</div>');
 	
-	      var bed = $('<img src="./images/bed.png" class="bed"></img>');
-	      $('.right-side').append(bed);
+	      var bed = $('<img src="./images/bed.svg" class="bedsvg"></img>');
+	      $('.frame').append(bed);
 	      var animals = currentLevel.animals;
+	      var nested_animals = currentLevel.nested_animals;
 	      for (var i = 0; i < animals.length; i++) {
-	        console.log(animals[i]);
 	        var animal = $('<img src="./images/' + animals[i] + '" class="animal"></img>');
 	        this.el.append(animal);
 	      }
+	      for (var j = 0; j < nested_animals.length; j++) {
+	        var nested = $('<img src="./images/' + nested_animals[j] + '" class="nested-animal"></img>');
+	        this.el.append(nested);
+	      }
 	      this.createInput();
+	    }
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      this.el.empty();
+	      this.disableFinishLevelButton();
+	      $('finish-level-button').prop('disabled', true);
+	      $('.directions').empty();
+	      $('.bed').empty();
+	      $('.css-input').empty();
+	      $('.html').empty();
 	    }
 	  }, {
 	    key: 'enableFinishLevelButton',
@@ -221,12 +267,14 @@
 	      var _this3 = this;
 	
 	      var children = el.children.length > 0 ? true : false;
+	
 	      var elName = el.tagName.toLowerCase();
 	      var wrapper = $('<div/>');
 	      var attributes = '';
-	      $.each(el.attributes, function () {
-	        if (_this3.specified) {
-	          attributes = attributes + ' ' + _this3.name + '="' + _this3.value + '"';
+	      // console.log(el.attributes);
+	      $.each(el.attributes, function (i, value) {
+	        if (value.specified) {
+	          attributes = attributes + ' ' + value.name + '="' + value.value + '"';
 	        }
 	      });
 	      var space = ' ';
@@ -269,8 +317,8 @@
 	            (function () {
 	              var completedLevels = [];
 	              if (window.localStorage.completedLevels.length > 0) {
-	                window.localStorage.completedLevels.forEach(function (level) {
-	                  completedLevels.push(level);
+	                window.localStorage.completedLevels.split('').forEach(function (level) {
+	                  completedLevels.push(parseInt(level));
 	                });
 	              }
 	              $('.bed').append("<div class='win-level-div'>Next Level!<button class='win-level-button>Next</button></div>'");
