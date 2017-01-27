@@ -24,7 +24,7 @@ In addition, this project will include:
 
 This app will be a single page app built with vanilla Javascript, jQuery, HTML, and CSS. The page will have a viewer for CSS user input and have a markup of the HTML code in the HTML viewer for the user to see how the visual portion is laid out.
 
-![wireframes](,./images/js_wireframe.png)
+![wireframes](../images/js_wireframe.png)
 
 ### Architecture and Technologies
 
