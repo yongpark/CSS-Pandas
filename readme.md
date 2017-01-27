@@ -6,7 +6,7 @@ CSS Pandas is a CSS tutorial game for beginners. Players will select various dif
 # How to Play
 Using the CSS code editor, players will input the correct selector the instructions are asking for. When the answer is correct, the enter button will become available to click and move on to the next level.
 
-<img src="./imgs/how_to_play.gif" style="width: 700px;"/>
+<img src="./images/how_to_play.gif" style="width: 700px;"/>
 
 
 # Local storage
