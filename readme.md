@@ -1,5 +1,5 @@
 # CSS pandas
-+ [CSS Pandas](https://winstonjz.github.io/return_gnome/)
++ [CSS Pandas](https://yongpark.github.io/CSS-Pandas/)
 
 CSS Pandas is a CSS tutorial game for beginners. Players will select various different stuffed animals using different CSS techniques.
 
