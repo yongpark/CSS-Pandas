@@ -21,5 +21,5 @@ The app will keep track of where you leave off when if you refresh using local s
 # Future Features
 
 * More levels and CSS selector techniques.
-* Better styling.
+* Better styling + animations.
 * Animate.css to help users pinpoint which element the instructions are asking to choose.
